@@ -9,12 +9,8 @@
 ## Table of Contents
 - [About the Project](#about-the-project)
 - [Features](#features)
-- [Installation](#installation)
-- [Usage](#usage)
-- [Screenshots](#screenshots)
 - [Tech Stack](#tech-stack)
 - [Contributing](#contributing)
-- [License](#license)
 - [Support](#support)
 
 ---
