@@ -49,7 +49,7 @@ async def about():
 # Redirect /detect_emotion to /detect_emotion.html
 @app.get("/detect_emotion/")
 async def redirect_detect_emotion():
-    return RedirectResponse(url="/detect_emotion.html")
+    return RedirectResponse(url="/detect_emotion")
 
 # Reject GET requests to /upload
 @app.get("/upload")
@@ -79,7 +79,8 @@ async def upload(file: UploadFile = File(...)):
         emotion = predict_emotion(file_path, runs=50)
         # Get the corresponding link for the predicted emotion
         link = emotion_links.get(emotion, "https://www.google.com")  # Default link
-        return JSONResponse(content={"emotion": emotion, "link": link})
+        message = f"I understand that you feel {emotion}. Maybe this might help you: {link}"
+        return JSONResponse(content={"emotion": emotion, "message": message, "link": link})
     except Exception as e:
         logger.error(f"Error predicting emotion: {e}")
         raise HTTPException(status_code=500, detail=f"Error processing file: {str(e)}")
