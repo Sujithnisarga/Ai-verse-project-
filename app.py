@@ -2,41 +2,49 @@ from fastapi import FastAPI, File, UploadFile, HTTPException
 from fastapi.responses import JSONResponse, FileResponse, RedirectResponse
 from fastapi.staticfiles import StaticFiles
 import os
-from model import predict_emotion
 import logging
 
+# Mock function for emotion prediction (replace with your actual model)
+def predict_emotion(file_path: str, runs: int = 50) -> str:
+    # Replace this with your actual emotion prediction logic
+    # For now, it returns a random emotion from the list
+    import random
+    emotions = ["happy", "sad", "angry", "neutral", "fear", "disgust", "surprise"]
+    return random.choice(emotions)
+
+# Configure logging
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
 
+# Initialize FastAPI app
 app = FastAPI()
 
-# Serve static files (CSS, JS) from the root directory
-app.mount("/static", StaticFiles(directory="."), name="static")
+# Serve static files (CSS, JS, images) from the "static" directory
+app.mount("/static", StaticFiles(directory="static"), name="static")
 
 # Emotion to website mapping
 emotion_links = {
-    "happy": "https://www.ted.com/talks",
-    "sad": "https://www.7cups.com",
-    "angry": "https://www.calm.com",
-    "neutral": "https://www.wikipedia.org",
-    "fear": "https://www.helpguide.org",
-    "disgust": "https://www.mind.org.uk",
-    "surprise": "https://www.boredpanda.com"
+    "happy": "https://www.ted.com/talks",  # Inspirational TED Talks
+    "sad": "https://www.7cups.com",       # Emotional support
+    "angry": "https://www.calm.com",      # Calming exercises
+    "neutral": "https://www.wikipedia.org",  # Neutral information
+    "fear": "https://www.helpguide.org",  # Overcoming fear
+    "disgust": "https://www.mind.org.uk",  # Mental health support
+    "surprise": "https://www.boredpanda.com"  # Fun and surprising content
 }
 
-
-# Serve HTML files directly
+# Serve HTML files
 @app.get("/")
 async def index():
-    return FileResponse("index.html")
+    return FileResponse("static/index.html")
 
 @app.get("/detect_emotion")
 async def detect_emotion():
-    return FileResponse("detect_emotion.html")
+    return FileResponse("static/detect_emotion.html")
 
 @app.get("/about")
 async def about():
-    return FileResponse("about.html")
+    return FileResponse("static/about.html")
 
 # Redirect /detect_emotion to /detect_emotion.html
 @app.get("/detect_emotion/")
@@ -70,7 +78,7 @@ async def upload(file: UploadFile = File(...)):
     try:
         emotion = predict_emotion(file_path, runs=50)
         # Get the corresponding link for the predicted emotion
-        link = emotion_links.get(emotion, "https://www.default.com")
+        link = emotion_links.get(emotion, "https://www.google.com")  # Default link
         return JSONResponse(content={"emotion": emotion, "link": link})
     except Exception as e:
         logger.error(f"Error predicting emotion: {e}")
