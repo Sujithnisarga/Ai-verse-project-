@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Detect Emotion</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/static/style.css"> <!-- Reference CSS correctly -->
+    <!-- Add FontAwesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <header>
+        <div class="logo">
+            <i class="fas fa-brain"></i> <!-- Add an icon here -->
+            Emotion<span>AI</span>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="/">Home</a></li>
+                <li><a href="/about">About Us</a></li>
+                <li><a href="/detect_emotion">Detect Emotion</a></li>
+            </ul>
+        </nav>
+    </header>
+    <div class="container emotion-container">
+        <h1>Detect Your Emotion</h1>
+        <p>Upload a .wav file or record your voice to detect your emotion.</p>
+
+        <!-- Upload Section -->
+        <div class="upload-section">
+            <button id="uploadBtn" class="btn">
+                <i class="fas fa-upload"></i> Upload Audio
+            </button>
+            <input type="file" id="fileInput" accept=".wav" style="display: none;">
+        </div>
+
+        <!-- OR Divider -->
+        <div class="or-text">OR</div>
+
+        <!-- Recording Section -->
+        <div class="record-section">
+            <button id="recordBtn" class="btn">
+                <i class="fas fa-microphone"></i> Start Recording
+            </button>
+            <audio id="audioPlayback" controls style="display:none; margin-top: 15px;"></audio>
+            <div class="record-controls" style="display: none;">
+                <button id="deleteRecording" class="btn">
+                    <i class="fas fa-trash"></i> Delete
+                </button>
+                <button id="submitRecording" class="btn">
+                    <i class="fas fa-paper-plane"></i> Submit
+                </button>
+            </div>
+        </div>
+
+        <!-- Progress and Result Section -->
+        <div class="status-section">
+            <div class="status-icon" id="statusIcon">?</div>
+            <div class="progress-container">
+                <div class="progress-bar" id="progress-bar"></div>
+            </div>
+            <div class="result-text" id="resultText"></div>
+        </div>
+    </div>
+
+    <!-- Reference JavaScript files correctly -->
+    <script src="/static/script.js"></script>
+    <script src="/static/recorder.js"></script>
+</body>
+</html>
