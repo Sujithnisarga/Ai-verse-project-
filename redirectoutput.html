@@ -1,22 +1,66 @@
 <!-- Example in detect_emotion.html -->
-<div id="result">
-    <p>Emotion: <span id="emotion"></span></p>
-    <p>Link: <a id="emotion-link" href="#">Click here</a></p>
-</div>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Detect Emotion</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            text-align: center;
+        }
+        #result {
+            margin-top: 20px;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            background-color: #f9f9f9;
+        }
+        a {
+            color: #007BFF;
+            text-decoration: none;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Detect Emotion from Audio</h1>
+        <form id="upload-form">
+            <input type="file" id="file-input" accept=".wav" required>
+            <button type="submit">Upload and Detect</button>
+        </form>
+        <div id="result" style="display: none;">
+            <p>Emotion: <span id="emotion"></span></p>
+            <p>Visit this link: <a id="emotion-link" href="#" target="_blank">Click here</a></p>
+        </div>
+    </div>
 
-<script>
-    async function uploadFile() {
-        const fileInput = document.getElementById('file-input');
-        const formData = new FormData();
-        formData.append('file', fileInput.files[0]);
+    <script>
+        document.getElementById("upload-form").addEventListener("submit", async (e) => {
+            e.preventDefault();
+            const fileInput = document.getElementById('file-input');
+            const formData = new FormData();
+            formData.append('file', fileInput.files[0]);
 
-        const response = await fetch('/upload', {
-            method: 'POST',
-            body: formData
+            const response = await fetch('/upload', {
+                method: 'POST',
+                body: formData
+            });
+
+            const result = await response.json();
+            document.getElementById('emotion').innerText = result.emotion;
+            document.getElementById('emotion-link').href = result.link;
+            document.getElementById('result').style.display = 'block';
         });
-
-        const result = await response.json();
-        document.getElementById('emotion').innerText = result.emotion;
-        document.getElementById('emotion-link').href = result.link;
-    }
-</script>
+    </script>
+</body>
+</html>
