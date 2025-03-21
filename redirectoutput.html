@@ -57,7 +57,8 @@
 
             const result = await response.json();
             document.getElementById('message').innerText = result.message;
-            document.getElementById('emotion-link').href = result.link;
+            // Use the /redirect endpoint to handle the redirection
+            document.getElementById('emotion-link').href = `/redirect?link=${encodeURIComponent(result.link)}`;
             document.getElementById('result').style.display = 'block';
         });
     </script>
