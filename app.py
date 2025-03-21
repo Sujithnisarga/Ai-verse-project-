@@ -4,7 +4,7 @@ from fastapi.staticfiles import StaticFiles
 import os
 from model import predict_emotion
 import logging
-
+import os
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
 
