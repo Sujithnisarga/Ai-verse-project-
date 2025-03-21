@@ -15,14 +15,15 @@ app.mount("/static", StaticFiles(directory="."), name="static")
 
 # Emotion to website mapping
 emotion_links = {
-    "happy": "https://www.happy.com",
-    "sad": "https://www.sad.com",
-    "angry": "https://www.angry.com",
-    "neutral": "https://www.neutral.com",
-    "fear": "https://www.fear.com",
-    "disgust": "https://www.disgust.com",
-    "surprise": "https://www.surprise.com"
+    "happy": "https://www.ted.com/talks",
+    "sad": "https://www.7cups.com",
+    "angry": "https://www.calm.com",
+    "neutral": "https://www.wikipedia.org",
+    "fear": "https://www.helpguide.org",
+    "disgust": "https://www.mind.org.uk",
+    "surprise": "https://www.boredpanda.com"
 }
+
 
 # Serve HTML files directly
 @app.get("/")
