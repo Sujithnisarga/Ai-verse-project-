@@ -1,0 +1,22 @@
+<!-- Example in detect_emotion.html -->
+<div id="result">
+    <p>Emotion: <span id="emotion"></span></p>
+    <p>Link: <a id="emotion-link" href="#">Click here</a></p>
+</div>
+
+<script>
+    async function uploadFile() {
+        const fileInput = document.getElementById('file-input');
+        const formData = new FormData();
+        formData.append('file', fileInput.files[0]);
+
+        const response = await fetch('/upload', {
+            method: 'POST',
+            body: formData
+        });
+
+        const result = await response.json();
+        document.getElementById('emotion').innerText = result.emotion;
+        document.getElementById('emotion-link').href = result.link;
+    }
+</script>
