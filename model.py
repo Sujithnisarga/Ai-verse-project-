@@ -8,7 +8,7 @@ model_name = "r-f/wav2vec-english-speech-emotion-recognition"
 feature_extractor = Wav2Vec2FeatureExtractor.from_pretrained(model_name)
 model = Wav2Vec2ForSequenceClassification.from_pretrained(model_name)
 
-def predict_emotion(audio_path, runs=50):
+def predict_emotion(audio_path, runs=10):
     try:
         # Load and normalize the audio file
         audio, rate = librosa.load(audio_path, sr=16000)

@@ -309,6 +309,7 @@ nav ul li a:hover {
     width: 90%;
     max-width: 600px;
     box-shadow: 0 12px 40px rgba(0, 0, 0, 0.4);
+    margin: 0 auto; /* Center the container */
 }
 
 .emotion-container h1 {
@@ -323,21 +324,14 @@ nav ul li a:hover {
     margin-bottom: 30px;
 }
 
-.upload-section, .record-section {
+.upload-section {
     margin-bottom: 20px;
 }
 
-.or-text {
-    font-size: 18px;
-    color: #ccc;
-    margin: 20px 0;
-}
-
-.record-controls {
-    display: flex;
-    justify-content: center;
-    gap: 10px;
-    margin-top: 15px;
+.upload-section .btn {
+    width: 100%;
+    max-width: 300px; /* Limit button width */
+    margin: 0 auto; /* Center the button */
 }
 
 .status-section {

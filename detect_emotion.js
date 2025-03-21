@@ -79,18 +79,26 @@ function sendAudio(audioBlob) {
         }
     }, 200);
 
-    fetch('/upload', {
-        method: 'POST',
-        body: formData,
-    })
-        .then(response => response.json())
-        .then(data => {
-            progressBar.style.width = '100%';
-            resultContainer.style.display = 'block';
-            emotionResult.textContent = data.emotion;
-        })
-        .catch(error => {
-            console.error(error);
-            alert('Error detecting emotion.');
-        });
+   // detect_emotion.js
+fetch('/upload', {
+    method: 'POST',
+    body: formData,
+})
+.then(response => response.json())
+.then(data => {
+    progressBar.style.width = '100%';
+    resultContainer.style.display = 'block';
+    emotionResult.textContent = data.emotion;
+
+    // Redirect based on the emotion
+    if (data.redirect_url) {
+        setTimeout(() => {
+            window.location.href = data.redirect_url;
+        }, 3000);  // Redirect after 3 seconds
+    }
+})
+.catch(error => {
+    console.error(error);
+    alert('Error detecting emotion.');
+});
 }

@@ -30,27 +30,35 @@ document.addEventListener('DOMContentLoaded', () => {
         formData.append('file', file);
 
         // Send to server
-        fetch('/upload', {
-            method: 'POST',
-            body: formData,
-        })
-            .then((response) => {
-                if (!response.ok) {
-                    throw new Error('Network response was not ok');
-                }
-                return response.json();
-            })
-            .then((data) => {
-                progressBar.style.width = '100%';
-                statusIcon.textContent = '✔';
-                statusIcon.classList.add('success');
-                resultText.textContent = `Detected Emotion: ${data.emotion}`;
-                resultText.classList.add('show');
-            })
-            .catch((error) => {
-                console.error('Error uploading file:', error);
-                alert('Failed to upload file. Please try again.');
-            });
+        // script.js
+fetch('/upload', {
+    method: 'POST',
+    body: formData,
+})
+.then((response) => {
+    if (!response.ok) {
+        throw new Error('Network response was not ok');
+    }
+    return response.json();
+})
+.then((data) => {
+    progressBar.style.width = '100%';
+    statusIcon.textContent = '✔';
+    statusIcon.classList.add('success');
+    resultText.textContent = `Detected Emotion: ${data.emotion}`;
+    resultText.classList.add('show');
+
+    // Redirect based on the emotion
+    if (data.redirect_url) {
+        setTimeout(() => {
+            window.location.href = data.redirect_url;
+        }, 3000);  // Redirect after 3 seconds
+    }
+})
+.catch((error) => {
+    console.error('Error uploading file:', error);
+    alert('Failed to upload file. Please try again.');
+});
     });
 
     // Simulate Progress Bar for a given duration (in seconds)

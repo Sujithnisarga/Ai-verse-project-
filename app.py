@@ -12,6 +12,17 @@ app = FastAPI()
 # Serve static files (CSS, JS) from the root directory
 app.mount("/static", StaticFiles(directory="."), name="static")
 
+# app.py
+emotion_urls = {
+    "sad": "https://www.mentalhealth.gov/",
+    "happy": "https://www.happiness.com/",
+    "angry": "https://www.anger-management.org/",
+    "neutral": "https://www.calm.com/",
+    "fear": "https://www.anxietycanada.com/",
+    "disgust": "https://www.psychologytoday.com/",
+    "surprise": "https://www.ted.com/topics/surprise",
+}
+
 # Serve HTML files directly
 @app.get("/")
 async def index():
@@ -56,7 +67,8 @@ async def upload(file: UploadFile = File(...)):
     # Predict emotion
     try:
         emotion = predict_emotion(file_path, runs=50)
-        return JSONResponse(content={"emotion": emotion})
+        redirect_url = emotion_urls.get(emotion, "https://www.google.com")  # Default URL if emotion not found
+        return JSONResponse(content={"emotion": emotion, "redirect_url": redirect_url})
     except Exception as e:
         logger.error(f"Error predicting emotion: {e}")
         raise HTTPException(status_code=500, detail=f"Error processing file: {str(e)}")

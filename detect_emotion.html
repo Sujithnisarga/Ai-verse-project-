@@ -24,7 +24,7 @@
     </header>
     <div class="container emotion-container">
         <h1>Detect Your Emotion</h1>
-        <p>Upload a .wav file or record your voice to detect your emotion.</p>
+        <p>Upload a .wav file to detect your emotion.</p>
 
         <!-- Upload Section -->
         <div class="upload-section">
@@ -32,25 +32,6 @@
                 <i class="fas fa-upload"></i> Upload Audio
             </button>
             <input type="file" id="fileInput" accept=".wav" style="display: none;">
-        </div>
-
-        <!-- OR Divider -->
-        <div class="or-text">OR</div>
-
-        <!-- Recording Section -->
-        <div class="record-section">
-            <button id="recordBtn" class="btn">
-                <i class="fas fa-microphone"></i> Start Recording
-            </button>
-            <audio id="audioPlayback" controls style="display:none; margin-top: 15px;"></audio>
-            <div class="record-controls" style="display: none;">
-                <button id="deleteRecording" class="btn">
-                    <i class="fas fa-trash"></i> Delete
-                </button>
-                <button id="submitRecording" class="btn">
-                    <i class="fas fa-paper-plane"></i> Submit
-                </button>
-            </div>
         </div>
 
         <!-- Progress and Result Section -->
@@ -65,6 +46,5 @@
 
     <!-- Reference JavaScript files correctly -->
     <script src="/static/script.js"></script>
-    <script src="/static/recorder.js"></script>
 </body>
 </html>
