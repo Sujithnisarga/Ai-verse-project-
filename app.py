@@ -14,12 +14,12 @@ app.mount("/static", StaticFiles(directory="."), name="static")
 
 # app.py
 emotion_urls = {
-    "sad": "https://www.mentalhealth.gov/",
+    "sad": "https://www.mentalhealth.org.uk/",
     "happy": "https://www.happiness.com/",
-    "angry": "https://www.anger-management.org/",
+    "angry": "https://www.apa.org/topics/anger/control",
     "neutral": "https://www.calm.com/",
-    "fear": "https://www.anxietycanada.com/",
-    "disgust": "https://www.psychologytoday.com/",
+    "fear": "https://www.nimh.nih.gov/health/topics/anxiety-disorders",
+    "disgust": "https://www.moodgym.com.au/",
     "surprise": "https://www.ted.com/topics/surprise",
 }
 
